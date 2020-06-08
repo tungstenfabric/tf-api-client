@@ -1,0 +1,6 @@
+[run]
+branch = True
+omit =
+    *__init__*
+    */tests/*
+    */gen/*
