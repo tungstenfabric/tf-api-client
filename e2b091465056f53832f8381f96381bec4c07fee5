@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e16c60c2_f0a0da75",
+        "filename": "schema/fabric.xsd",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 843
+      },
+      "writtenOn": "2020-06-23T08:32:54Z",
+      "side": 1,
+      "message": "\"Port_COS_Untrust\" is not in line with other variables naming convension.",
+      "revId": "e2b091465056f53832f8381f96381bec4c07fee5",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    }
+  ]
+}
