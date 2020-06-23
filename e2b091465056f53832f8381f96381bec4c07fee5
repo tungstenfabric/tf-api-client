@@ -16,6 +16,24 @@
       "revId": "e2b091465056f53832f8381f96381bec4c07fee5",
       "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4737a3d_11a681dc",
+        "filename": "schema/fabric.xsd",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 504
+      },
+      "writtenOn": "2020-06-23T16:20:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e16c60c2_f0a0da75",
+      "revId": "e2b091465056f53832f8381f96381bec4c07fee5",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": false
     }
   ]
 }
