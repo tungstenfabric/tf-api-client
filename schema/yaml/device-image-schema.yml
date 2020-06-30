@@ -28,7 +28,7 @@ schema:
         be used by device manager during image upgrade to send additional flag for
         vmhost based REs.
       operations: CRUD
-      presence: required
+      presence: optional
       type: string
     device_image_file_uri:
       description: file uri for the device image uploaded to the image server.
@@ -73,7 +73,6 @@ schema:
       presence: required
       type: string
   required:
-  - device_image_file_name
   - device_image_vendor_name
   - device_image_device_family
   - device_image_os_version
