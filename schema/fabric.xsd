@@ -1074,6 +1074,16 @@
      </xsd:restriction>
 </xsd:simpleType>
 
+<xsd:simpleType name="OnboardingStateType">
+     <xsd:restriction base='xsd:string'>
+         <xsd:enumeration value='discovered'/>
+         <xsd:enumeration value='interfaces_onboarded'/>
+         <xsd:enumeration value='topology_discovered'/>
+         <xsd:enumeration value='role_discovered'/>
+         <xsd:enumeration value='underlay_configured'/>
+     </xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="CommitStateType">
      <xsd:restriction base='xsd:string'>
          <xsd:enumeration value='in_sync'/>
@@ -1195,6 +1205,11 @@
 <!--#IFMAP-SEMANTICS-IDL
           Property('physical-router-managed-state', 'physical-router', 'optional', 'CRUD',
               'Managed state for the physical router. Used to RMA devices') -->
+
+<xsd:element name="physical-router-onboarding-state" type='OnboardingStateType'/>
+<!--#IFMAP-SEMANTICS-IDL
+          Property('physical-router-onboarding-state', 'physical-router', 'optional', 'CRUD',
+              'Onboarding state for the physical router. These states are updated during the ZTP/Brownfield of the device such as discovered, interface onboarded, topology discovered, underlay configured and others') -->
 
 <xsd:element name="physical-router-underlay-config" type='xsd:string'/>
 <!--#IFMAP-SEMANTICS-IDL
