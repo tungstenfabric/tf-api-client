@@ -2181,6 +2181,14 @@ definitions:
     - ovs-compute
     - sriov-compute
     type: string
+  OnboardingStateType:
+    enum:
+    - discovered
+    - interfaces_onboarded
+    - topology_discovered
+    - role_discovered
+    - underlay_configured
+    type: string
   OspfAreaType:
     enum:
     - nssa
