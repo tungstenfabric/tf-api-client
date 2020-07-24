@@ -19,6 +19,7 @@ class DisplayNameTest : public ::testing::Test {
         vnc_cfg_ParserInit(xparser_);
     }
 
+    
     pugi::xml_document xdoc_;
     IFMapServerParser *xparser_;
 };
