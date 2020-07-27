@@ -40,7 +40,7 @@ from .utils import (
     AAA_MODE_VALID_VALUES, CamelCase, str_to_class)
 from .exceptions import (
     ServiceUnavailableError, NoIdError, PermissionDenied, OverQuota,
-    RefsExistError, TimeOutError, BadRequest, HttpError,
+    RefsExistError, TimeOutError, BadRequest, HttpError, VncError,
     ResourceTypeUnknownError, RequestSizeError, AuthFailed)
 from . import ssl_adapter
 
@@ -1305,7 +1305,7 @@ class VncApi(object):
         except HttpError as he:
             if he.status_code == 404:
                 return None
-            raise he
+            raise HttpError(he.status_code, he.content)
 
         return json.loads(content)['uuid']
     # end ref_update
@@ -1322,7 +1322,7 @@ class VncApi(object):
         except HttpError as he:
             if he.status_code == 404:
                 return None
-            raise he
+            raise HttpError(he.status_code, he.content)
 
         return json.loads(content)['uuid']
     # end ref_relax_for_delete
@@ -1340,7 +1340,11 @@ class VncApi(object):
         except HttpError as he:
             if he.status_code == 404:
                 return None
-            raise he
+            raise HttpError(he.status_code, he.content)
+        except VncError as exc:
+            raise exc
+        except Exception as exc:
+            raise HttpError(500, str(exc))
 
         return json.loads(content)['uuid']
     # end fq_name_to_id
