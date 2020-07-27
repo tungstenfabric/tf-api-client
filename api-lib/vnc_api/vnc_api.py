@@ -1305,7 +1305,7 @@ class VncApi(object):
         except HttpError as he:
             if he.status_code == 404:
                 return None
-            raise he
+            raise HttpError(he.status_code, he.content)
 
         return json.loads(content)['uuid']
     # end ref_update
@@ -1322,7 +1322,7 @@ class VncApi(object):
         except HttpError as he:
             if he.status_code == 404:
                 return None
-            raise he
+            raise HttpError(he.status_code, he.content)
 
         return json.loads(content)['uuid']
     # end ref_relax_for_delete
@@ -1340,7 +1340,7 @@ class VncApi(object):
         except HttpError as he:
             if he.status_code == 404:
                 return None
-            raise he
+            raise HttpError(he.status_code, he.content)
 
         return json.loads(content)['uuid']
     # end fq_name_to_id
