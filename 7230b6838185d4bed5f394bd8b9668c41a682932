@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6063a33b_87f7538b",
+        "filename": "api-lib/vnc_api/vnc_api.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 56
+      },
+      "writtenOn": "2020-07-29T02:30:27Z",
+      "side": 1,
+      "message": "_request will raise various exceptions based on the HTTPCode (https://github.com/tungstenfabric/tf-api-client/blob/93d5a652b88b9dd32ce4f376a7a12478eed15b88/api-lib/vnc_api/vnc_api.py#L1128)\n\nThis fix masks all errors and raises as HttpError.\n\nCan you explain why this fix is needed and how this fix address the  UT failures. May be i am missing something here.",
+      "revId": "7230b6838185d4bed5f394bd8b9668c41a682932",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    }
+  ]
+}
