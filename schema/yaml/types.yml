@@ -1401,6 +1401,7 @@ definitions:
     - link-local
     - end-to-end
     - segment
+    - vn-ip-list
     type: string
   HealthmonitorType:
     enum:
@@ -1754,6 +1755,11 @@ definitions:
         presence: 'true'
       timeout:
         description: Time in seconds to wait for response
+        presence: 'true'
+        type: integer
+      target_ip_list:
+        description: Any address that belongs to the list has to run BFD health
+          check
         presence: 'true'
         type: integer
       url_path:
