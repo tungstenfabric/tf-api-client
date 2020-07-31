@@ -131,6 +131,12 @@ schema:
       description: MAC aging time on the network
       operations: CRUD
       presence: optional
+    mac_ip_learning_enable:
+      default: false
+      description: Enable MAC IP learning on the network
+      operations: CRUD
+      presence: optional
+      type: boolean
     mac_learning_enabled:
       default: false
       description: Enable MAC learning on the network
@@ -186,6 +192,11 @@ schema:
       operations: CRUD
       presence: optional
       type: boolean
+    service_health_check:
+      description: Reference to health check object attached to VN object,
+        used to enable BFD health check over MAC IP Learnt IP Addresses of VN.
+      operations: CRUD
+      presence: optional
     virtual_network_category:
       $ref: types.json#/definitions/VirtualNetworkCategory
       description: This attribute is to differentiate the infrastructure networks
