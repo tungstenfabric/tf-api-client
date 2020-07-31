@@ -2989,6 +2989,8 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
              description='Used to verify the forwarding path from left-most service-instance to right-most service-instance or any service beyond that'/>
         <xsd:enumeration value="segment"
              description='Used to verify the health of single service-instance'/>
+        <xsd:enumeration value="vn-ip-list"
+             description='Used to verify the health of list of IP addresses of a VN'/>
     </xsd:restriction>
 </xsd:simpleType>
 
@@ -3016,6 +3018,8 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
              description='In case monitor protocol is HTTP, URL to be used. In case of ICMP, ip address'/>
         <xsd:element name='expected-codes' type='xsd:string' required='optional' operations='CRUD'
              description='In case monitor protocol is HTTP, expected return code for HTTP operations like 200 ok.'/>
+        <xsd:element name="target-ip-list" type="xsd:string" required='optional' operations='CRUD'
+             description='Any address that belongs to the list has to run BFD health check'/>
     </xsd:sequence>
 </xsd:complexType>
 
@@ -3041,6 +3045,12 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
      Link('bgpaas-health-check',
           'bgp-as-a-service', 'service-health-check', ['ref'], 'optional', 'CRUD',
           'Reference to health check object attached to BGPaaS object, used to enable BFD health check over active BGPaaS VMI.') -->
+
+<xsd:element name="vn-health-check"/>
+<!--#IFMAP-SEMANTICS-IDL
+     Link('vn-health-check',
+          'virtual-network', 'service-health-check', ['ref'], 'optional', 'CRUD',
+          'Reference to health check object attached to VN object, used to enable BFD health check over MAC IP Learnt IP Addresses of VN.') -->
 
 <xsd:element name="route-table" type="ifmap:IdentityType"/>
 <xsd:element name="project-route-table"/>
@@ -3839,5 +3849,11 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
 
 <!-- Sub-cluster  -->
 <xsd:include schemaLocation='sub_cluster.xsd'/>
+
+<!-- MAC-IP Learning configuration -->
+<xsd:element name="mac-ip-learning-enable" type="xsd:boolean" default="false"/>
+<!--#IFMAP-SEMANTICS-IDL
+     Property('mac-ip-learning-enable', 'virtual-network', 'optional', 'CRUD',
+              'Enable/Disable MAC-IP Learning on the network') -->
 
 </xsd:schema>
