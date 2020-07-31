@@ -54,6 +54,11 @@ references:
     description: Reference to security logging object for this virtual network.
     operations: CRUD
     presence: optional
+  service_health_check:
+    description: Reference to health check object attached to VN object, used to enable
+      BFD health check over MAC IP Learnt IP Addresses of VN.
+    operations: CRUD
+    presence: optional
   virtual_network:
     description: Reference to a virtual network which is the provider network for
       the given virtual network. Traffic forwarding happens in the routing instance
@@ -131,6 +136,12 @@ schema:
       description: MAC aging time on the network
       operations: CRUD
       presence: optional
+    mac_ip_learning_enable:
+      default: false
+      description: Enable/Disable MAC-IP Learning on the network
+      operations: CRUD
+      presence: optional
+      type: boolean
     mac_learning_enabled:
       default: false
       description: Enable MAC learning on the network
