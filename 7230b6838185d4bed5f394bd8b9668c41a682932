@@ -16,6 +16,24 @@
       "revId": "7230b6838185d4bed5f394bd8b9668c41a682932",
       "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ddba819_bf800268",
+        "filename": "api-lib/vnc_api/vnc_api.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 578
+      },
+      "writtenOn": "2020-08-04T05:58:25Z",
+      "side": 1,
+      "message": "It didn\u0027t meant to be a fix. I wanted to know what is the real problem. Right now we get generic \"Internal Server Error\". I thought that changing it will help to reveal what causes internal server error. It didn\u0027t work unfortunately. I need to compare R2008 commits with master and find what changed in between.",
+      "parentUuid": "6063a33b_87f7538b",
+      "revId": "7230b6838185d4bed5f394bd8b9668c41a682932",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
     }
   ]
 }
