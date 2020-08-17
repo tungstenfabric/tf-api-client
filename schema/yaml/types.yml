@@ -826,6 +826,7 @@ definitions:
   DataCenterInterconnectModes:
     enum:
     - l3
+    - l2
     type: string
   DefaultProtocolType:
     properties:
