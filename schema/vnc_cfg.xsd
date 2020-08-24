@@ -247,6 +247,11 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
     </xsd:all>
 </xsd:complexType>
 
+<xsd:complexType name="ServicePropertiesType">
+        <xsd:element name="retain-as-path" type="xsd:boolean" default="false"     required='optional'
+             description='Indicates if as-path should be retained across service-instances in the service-chain'/>
+</xsd:complexType>
+
 <xsd:complexType name="ActionListType">
     <xsd:all>
         <xsd:element name="simple-action" type="SimpleActionType" required='true'
@@ -255,6 +260,8 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
              description='For internal use only'/>
         <xsd:element name="apply-service" type="xsd:string" maxOccurs="unbounded" required='optional'
              description='Ordered list of service instances in service chain applied to traffic matching the rule'/>
+        <xsd:element name="service-properties" type="ServicePropertiesType"       required='optional'
+             description='Properties of the service-policy if action is apply-service'/>
         <xsd:element name="mirror-to" type="MirrorActionType"                     required='optional'
              description='Mirror traffic matching this rule'/>
         <xsd:element name="assign-routing-instance" type="xsd:string"             required='optional'
