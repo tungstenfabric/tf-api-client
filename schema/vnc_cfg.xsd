@@ -3220,6 +3220,11 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
 <!--#IFMAP-SEMANTICS-IDL
          Property('flow-node-inband-interface', 'flow-node', 'optional', 'CRUD',
               'In-Band interface name used for this flow node.') -->
+<xsd:element name="flow-node-fabric"/>
+<!--#IFMAP-SEMANTICS-IDL
+    Link('flow-node-fabric',
+         'flow-node', 'fabric', ['ref'], 'optional', 'CRUD',
+         'Reference to fabric, this link enables to identify which fabric, this flow-node belongs to.') -->
 
 <xsd:element name="devicemgr-node" type="ifmap:IdentityType"/>
 <xsd:element name="global-system-config-devicemgr-node"/>
