@@ -96,6 +96,10 @@ definitions:
         description: FQN of Qos configuration object for QoS marking
         presence: optional
         type: string
+      service_properties:
+        $ref: types.json#/definitions/ServicePropertiesType
+        description: Properties of the service-policy if action is apply-service
+        presence: optional
       simple_action:
         $ref: types.json#/definitions/SimpleActionType
         description: Simple allow(pass) or deny action for traffic matching this rule
@@ -3191,6 +3195,8 @@ definitions:
         items:
           type: string
         type: array
+      retain_as_path:
+        type: boolean
       routing_instance:
         type: string
       sc_head:
@@ -3355,6 +3361,14 @@ definitions:
     - in-network
     - in-network-nat
     type: string
+  ServicePropertiesType:
+    properties:
+      retain_as_path:
+        description: Indicates if as-path should be retained across service-instances
+          in the service-chain
+        presence: optional
+        type: boolean
+    type: object
   ServiceScaleOutType:
     properties:
       auto_scale:
