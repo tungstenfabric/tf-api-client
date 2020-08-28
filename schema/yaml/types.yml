@@ -2326,6 +2326,7 @@ definitions:
     - e2-internet
     - e2-vrr
     - pnf
+    - superspine
     type: string
   PimMode:
     enum:

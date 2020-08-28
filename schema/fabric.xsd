@@ -320,6 +320,7 @@
          <xsd:enumeration value='e2-internet'/>
          <xsd:enumeration value='e2-vrr'/>
          <xsd:enumeration value='pnf'/>
+         <xsd:enumeration value='superspine'/>
      </xsd:restriction>
 </xsd:simpleType>
 
