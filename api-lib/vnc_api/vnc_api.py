@@ -221,6 +221,7 @@ class ApiServerSession(object):
     # end get_url
 
     def crud(self, method, url, *args, **kwargs):
+        err_msgs = []
         self.roundrobin()
         active_host, active_session = self.active_session
         kwargs['timeout'] = (self.connection_timeout,
@@ -240,7 +241,8 @@ class ApiServerSession(object):
                 if self.logger:
                     self.logger.log_response(result)
                 return result
-            except ConnectionError:
+            except ConnectionError as err:
+                err_msgs.append(err)
                 self.active_session = (None, None)
 
         for host, session in list(self.api_server_sessions.items()):
@@ -259,9 +261,10 @@ class ApiServerSession(object):
                     self.logger.log_response(result)
                 self.active_session = (host, session)
                 return result
-            except ConnectionError:
+            except ConnectionError as err:
+                err_msgs.append(err)
                 continue
-        raise ConnectionError
+        raise ConnectionError(err_msgs)
     # end crud
 
     def get(self, url, *args, **kwargs):
@@ -1099,9 +1102,9 @@ class VncApi(object):
                         url, body=data, headers=headers)
                 else:
                     raise ValueError
-            except ConnectionError:
+            except ConnectionError as err:
                 if (not retry_on_error or not retry_count):
-                    raise ConnectionError
+                    raise ConnectionError(err)
 
                 time.sleep(1)
                 self._create_api_server_session()
