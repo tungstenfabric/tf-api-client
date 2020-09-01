@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3207fa3b_0da9d020",
+        "filename": "schema/vnc_cfg.xsd",
+        "patchSetId": 9
+      },
+      "lineNbr": 3021,
+      "author": {
+        "id": 56
+      },
+      "writtenOn": "2020-09-01T16:38:50Z",
+      "side": 1,
+      "message": "Why are we storing list of IP\u0027s as  comma separated string? instead we can store it as list similar to below properties?\n\n        \u003cxsd:element name\u003d\"allocation-pools\" type\u003d\"AllocationPoolType\" maxOccurs\u003d\"unbounded\" required\u003d\u0027optional\u0027\n             description\u003d\u0027List of ranges of ip address for vrouter specific allocation\u0027/\u003e\n        \u003cxsd:element name\u003d\"subnet\" type\u003d\"SubnetType\" maxOccurs\u003d\"unbounded\" required\u003d\u0027optional\u0027\n             description\u003d\u0027List of ip prefix and length for vrouter specific subnets\u0027/\u003e",
+      "revId": "85a1758475aa7258f1e66b427da87288067195a0",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    }
+  ]
+}
