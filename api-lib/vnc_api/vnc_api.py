@@ -29,10 +29,10 @@ import re
 import os
 from urllib.parse import urlparse
 
-from .gen.vnc_api_client_gen import all_resource_type_tuples
-from .gen.resource_xsd import *
-from .gen.resource_client import *
-from .gen.generatedssuper import GeneratedsSuper
+from vnc_api.gen.vnc_api_client_gen import all_resource_type_tuples
+from vnc_api.gen.resource_xsd import *
+from vnc_api.gen.resource_client import *
+from vnc_api.gen.generatedssuper import GeneratedsSuper
 
 from .utils import (
     OP_POST, OP_PUT, OP_GET, OP_DELETE, hdr_client_tenant,
