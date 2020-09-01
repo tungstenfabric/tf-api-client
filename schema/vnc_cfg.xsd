@@ -788,7 +788,7 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
 </xsd:complexType>
 
 <xsd:element name="id-perms" type="IdPermsType"/>
-<!--#IFMAP-SEMANTICS-IDL Property('id-perms', 'all', 'system-only', 'R',
+<!--#IFMAP-SEMANTICS-IDL Property('id-perms', 'all', 'system-only', 'RU',
                                   'System maintained identity, time  and permissions data.') -->
 
 <xsd:element name="perms2" type="PermType2"/>
