@@ -16,6 +16,24 @@
       "revId": "85a1758475aa7258f1e66b427da87288067195a0",
       "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83b3be04_7a2f4220",
+        "filename": "schema/vnc_cfg.xsd",
+        "patchSetId": 9
+      },
+      "lineNbr": 3021,
+      "author": {
+        "id": 473
+      },
+      "writtenOn": "2020-09-02T04:40:09Z",
+      "side": 1,
+      "message": "the variable can take \"all\" or a set of ip addresses. Thats the reason for having it as a string and parsing in the code later on. Thought this is best way instead of having two separate fields.\n\nThanks.",
+      "parentUuid": "3207fa3b_0da9d020",
+      "revId": "85a1758475aa7258f1e66b427da87288067195a0",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
     }
   ]
 }
