@@ -52,6 +52,24 @@
       "revId": "85a1758475aa7258f1e66b427da87288067195a0",
       "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17ed1516_cd47b972",
+        "filename": "schema/vnc_cfg.xsd",
+        "patchSetId": 9
+      },
+      "lineNbr": 3021,
+      "author": {
+        "id": 473
+      },
+      "writtenOn": "2020-09-02T06:01:47Z",
+      "side": 1,
+      "message": "Got it. My only concern with \"0.0.0.0\" to indicate all is that user can enter \"0.0.0.0\" and a valid IP address together. Instead i have decided to have two fields target-ip-all and target-ip-list with target-ip-list validly used when target-ip-all is false.",
+      "parentUuid": "1d2a917e_54659d28",
+      "revId": "85a1758475aa7258f1e66b427da87288067195a0",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
     }
   ]
 }
