@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ded2ff4_20b24796",
+        "filename": "schema/vnc_cfg.xsd",
+        "patchSetId": 10
+      },
+      "lineNbr": 3021,
+      "author": {
+        "id": 56
+      },
+      "writtenOn": "2020-09-02T15:06:38Z",
+      "side": 1,
+      "message": "Did you consider the following instead of second property \"target-ip-all\"\n\nIf user chooses \"vn-ip-list\" as health_check_type and \"target-ip-list\" is empty/not provided, code can assume all Ip\u0027s.",
+      "revId": "5f8451c059a6dc9c7d830986a62fd30d617e622a",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    }
+  ]
+}
