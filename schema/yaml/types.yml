@@ -1401,6 +1401,7 @@ definitions:
     - link-local
     - end-to-end
     - segment
+    - vn-ip-list
     type: string
   HealthmonitorType:
     enum:
@@ -3249,6 +3250,16 @@ definitions:
         description: Protocol used to monitor health, currently only HTTP, ICMP(ping),
           and BFD are supported
         presence: 'true'
+      target_ip_all:
+        description: Run BFD for all IP Addresses learnt by mac-ip learning, when
+          enabled.
+        presence: optional
+        type: boolean
+      target_ip_list:
+        $ref: types.json#/definitions/IpAddressesType
+        description: Any address that belongs to the list has to run BFD health check
+          when target-ip-all is false.
+        presence: optional
       timeout:
         description: Time in seconds to wait for response
         presence: 'true'
