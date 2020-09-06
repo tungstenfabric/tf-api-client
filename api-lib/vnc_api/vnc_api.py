@@ -45,6 +45,7 @@ from .exceptions import (
 from . import ssl_adapter
 
 DEFAULT_LOG_DIR = "/var/tmp/contrail_vnc_lib"
+API_SERVER_SESSION_VALIDATOR_CRUD_COUNT = 500
 
 
 def check_homepage(func):
@@ -166,8 +167,9 @@ class ActionUriDict(dict):
 
 
 class ApiServerSession(object):
-    def __init__(self, api_server_hosts, max_conns_per_pool, max_pools,
-                 timeout, connection_timeout, logger=None):
+    def __init__(self, api_server_hosts, api_server_port,
+                 max_conns_per_pool, max_pools, timeout,
+                 connection_timeout, logger=None):
         self.api_server_hosts = api_server_hosts
         self.max_conns_per_pool = max_conns_per_pool
         self.max_pools = max_pools
@@ -175,7 +177,10 @@ class ApiServerSession(object):
         self.connection_timeout = connection_timeout
         self.logger = logger
         self.api_server_sessions = OrderedDict()
+        self.api_server_port = api_server_port
         self.active_session = (None, None)
+        self.failed_api_server_session = False
+        self.api_server_session_crud_count = 0
         self.create()
     # end __init__
 
@@ -188,17 +193,27 @@ class ApiServerSession(object):
             last_used_index = -1
         # use the next host in the list
         next_index = last_used_index + 1
-        if next_index >= len(session_hosts):
-            # reuse the first host from the list
-            next_index = 0
-        active_host = session_hosts[next_index]
-        self.active_session = (active_host,
-                               self.api_server_sessions[active_host])
+        active_sessions_count = len(session_hosts)
+        if active_sessions_count > 0:
+            if next_index >= active_sessions_count:
+                # reuse the first host from the list
+                next_index = 0
+            active_host = session_hosts[next_index]
+            self.active_session = (active_host,
+                                   self.api_server_sessions[active_host])
+        self.api_server_session_crud_count += 1
+        if (active_sessions_count == 0) or (self.api_server_session_crud_count %
+            API_SERVER_SESSION_VALIDATOR_CRUD_COUNT == 0):
+            if self.failed_api_server_session:
+                self.create()
+            self.api_server_session_crud_count = 0
 
     def create(self):
+        self.failed_api_server_session = False
         for api_server_host in self.api_server_hosts:
+            if api_server_host in self.api_server_sessions.keys():
+                continue
             api_server_session = requests.Session()
-
             adapter = requests.adapters.HTTPAdapter(
                 pool_connections=self.max_conns_per_pool,
                 pool_maxsize=self.max_pools)
@@ -242,6 +257,8 @@ class ApiServerSession(object):
                 return result
             except ConnectionError:
                 self.active_session = (None, None)
+                self.api_server_sessions.pop(active_host)
+                self.failed_api_server_session = True
 
         for host, session in list(self.api_server_sessions.items()):
             if host not in url:
@@ -863,9 +880,9 @@ class VncApi(object):
 
     def _create_api_server_session(self):
         self._api_server_session = ApiServerSession(
-            self._web_hosts, self._max_conns_per_pool,
-            self._max_pools, self._timeout,
-            self._connection_timeout, self.curl_logger)
+            self._web_hosts, self._web_port,
+            self._max_conns_per_pool, self._max_pools,
+            self._timeout, self._connection_timeout, self.curl_logger)
     # end _create_api_server_session
 
     def _discover(self):

@@ -194,9 +194,11 @@ class TestVncApi(test_common.TestCase):
         # Bring down all fake servers
         httpretty.disable()
 
-        # Connect to a server
-        # Expected to connect to second server
-        # first server will used during authenticate
+        # Remove all 3 server's sessions
+        with ExpectedException(ConnectionError):
+            vnclib._request_server(OP_GET, url='/', retry_on_error=False)
+        with ExpectedException(ConnectionError):
+            vnclib._request_server(OP_GET, url='/', retry_on_error=False)
         with ExpectedException(ConnectionError):
             vnclib._request_server(OP_GET, url='/', retry_on_error=False)
 
