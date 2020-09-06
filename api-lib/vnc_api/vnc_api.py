@@ -45,6 +45,7 @@ from .exceptions import (
 from . import ssl_adapter
 
 DEFAULT_LOG_DIR = "/var/tmp/contrail_vnc_lib"
+API_SERVER_SESSION_VALIDATOR_CRUD_COUNT = 500
 
 
 def check_homepage(func):
@@ -166,8 +167,9 @@ class ActionUriDict(dict):
 
 
 class ApiServerSession(object):
-    def __init__(self, api_server_hosts, max_conns_per_pool, max_pools,
-                 timeout, connection_timeout, logger=None):
+    def __init__(self, api_server_hosts, max_conns_per_pool,
+                 max_pools, timeout, connection_timeout,
+                 logger=None, api_health_check=False):
         self.api_server_hosts = api_server_hosts
         self.max_conns_per_pool = max_conns_per_pool
         self.max_pools = max_pools
@@ -176,6 +178,9 @@ class ApiServerSession(object):
         self.logger = logger
         self.api_server_sessions = OrderedDict()
         self.active_session = (None, None)
+        self.failed_api_server_session = False
+        self.api_server_session_crud_count = 0
+        self.api_server_health_check = api_health_check
         self.create()
     # end __init__
 
@@ -194,11 +199,22 @@ class ApiServerSession(object):
         active_host = session_hosts[next_index]
         self.active_session = (active_host,
                                self.api_server_sessions[active_host])
+        if self.failed_api_server_session and self.api_server_health_check:
+            self.healthcheck()
+
+    def healthcheck(self):
+        self.api_server_session_crud_count += 1
+        if (len(self.api_server_sessions.keys()) == 0 or
+            (self.api_server_session_crud_count %
+             API_SERVER_SESSION_VALIDATOR_CRUD_COUNT == 0)):
+            self.create()
+            self.api_server_session_crud_count = 0
 
     def create(self):
         for api_server_host in self.api_server_hosts:
+            if api_server_host in self.api_server_sessions.keys():
+                continue
             api_server_session = requests.Session()
-
             adapter = requests.adapters.HTTPAdapter(
                 pool_connections=self.max_conns_per_pool,
                 pool_maxsize=self.max_pools)
@@ -210,6 +226,7 @@ class ApiServerSession(object):
             api_server_session.mount("https://", ssladapter)
             self.api_server_sessions.update(
                 {api_server_host: api_server_session})
+        self.failed_api_server_session = False
     # end create
 
     def get_url(self, url, api_server_host):
@@ -242,6 +259,9 @@ class ApiServerSession(object):
                 return result
             except ConnectionError:
                 self.active_session = (None, None)
+                if self.api_server_health_check:
+                    self.api_server_sessions.pop(active_host)
+                    self.failed_api_server_session = True
 
         for host, session in list(self.api_server_sessions.items()):
             if host not in url:
@@ -349,8 +369,8 @@ class VncApi(object):
                  domain_name=None, exclude_hrefs=None, auth_token_url=None,
                  apicertfile=None, apikeyfile=None, apicafile=None,
                  kscertfile=None, kskeyfile=None, kscafile=None,
-                 apiinsecure=None, ksinsecure=None,
-                 timeout=None, connection_timeout=None):
+                 apiinsecure=None, ksinsecure=None, timeout=None,
+                 connection_timeout=None, api_health_check=False):
         # TODO allow for username/password to be present in creds file
 
         self._obj_serializer = self._obj_serializer_diff
@@ -529,6 +549,8 @@ class VncApi(object):
                                        self._DEFAULT_WEB_PORT)
         else:
             self._web_port = api_server_port
+
+        self._api_health_check = api_health_check
 
         self._max_pools = int(_read_cfg(
             cfg_parser, 'global', 'MAX_POOLS',
@@ -865,7 +887,7 @@ class VncApi(object):
         self._api_server_session = ApiServerSession(
             self._web_hosts, self._max_conns_per_pool,
             self._max_pools, self._timeout,
-            self._connection_timeout, self.curl_logger)
+            self._connection_timeout, self.curl_logger, self._api_health_check)
     # end _create_api_server_session
 
     def _discover(self):
