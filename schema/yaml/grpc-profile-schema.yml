@@ -1,0 +1,29 @@
+api_style: contrail
+extends:
+- base
+id: grpc_profile
+parents:
+  project:
+    description: list of grpc profiles supported under the project.
+    operations: CRUD
+    presence: optional
+plural: grpc_profiles
+prefix: /
+references: {}
+schema:
+  properties:
+    grpc_parameters:
+      $ref: types.json#/definitions/gRPCParameters
+      description: Parameters for each grpc profile, such as allow client,
+        top level sensor options etc.
+      operations: CRUD
+      presence: optional
+    grpc_profile_is_default:
+      default: false
+      description: This attribute indicates whether it is a default grpc profile or
+        not. Default profiles are non-editable.
+      operations: CRUD
+      presence: optional
+      type: boolean
+  required: []
+  type: object
