@@ -166,6 +166,22 @@
     </xsd:all>
 </xsd:complexType>
 
+<xsd:simpleType name="EnabledSensorParams">
+     <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="physical-health"/>
+         <xsd:enumeration value="interface-health"/>
+         <xsd:enumeration value="control-plane-health"/>
+         <xsd:enumeration value="service-layer-health"/>
+     </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="SecureModeType">
+     <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="cleartext"/>
+         <xsd:enumeration value="ssl"/>
+     </xsd:restriction>
+</xsd:simpleType>
+
 <xsd:complexType name="SflowParameters">
     <xsd:all>
        <xsd:element name="stats-collection-frequency" type="StatsCollectionFrequency"
@@ -178,6 +194,33 @@
             description= "User can enable sflow either on all interfaces or all fabric ports or all access ports or custom list of interfaces." />
        <xsd:element name="enabled-interface-params" type="EnabledInterfaceParams" maxOccurs="unbounded"
             description= "If interface type is set to custom, this represents the list of physical interfaces to be enabled for sflow. User can specify polling interval and sample rate for each interface in this custom list." />
+    </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="gRPCParameters">
+    <xsd:all>
+       <xsd:element name="grpc-enable" type="xsd:boolean" default="false"
+            description= "if this option is selected, then this enables gRPC based metric collection on select sensors" />
+       <xsd:element name="allow-clients" type="SubnetListType" required="optional"
+            description= "whitelist subnet of allowed clients on which various KPIs can be monitored. This option is available only if grpc-enable is checked (True)" />
+       <xsd:element name="enabled-sensor-params" type="EnabledSensorParams" maxOccurs="unbounded"
+            description= "List of different top level sensor params that the user wishes to monitor using telemetry. The user can include one or all of these for telemetry monitoring by selecting specific options." />
+       <xsd:element name="secure-mode" type="SecureModeType" required="optional"
+            description= "secure (SSL) or cleartext mode of gRPC configuration." />
+    </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="snmpParameters">
+    <xsd:all>
+       <xsd:element name="enabled-sensor-params" type="EnabledSensorParams" maxOccurs="unbounded"
+            description= "List of different top level sensor params that the user wishes to monitor using telemetry. The user can include one or all of these for telemetry monitoring by selecting specific options." />
+    </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="netconfParameters">
+    <xsd:all>
+       <xsd:element name="enabled-sensor-params" type="EnabledSensorParams" maxOccurs="unbounded"
+            description= "List of different top level sensor params that the user wishes to monitor using telemetry. The user can include one or all of these for telemetry monitoring by selecting specific options." />
     </xsd:all>
 </xsd:complexType>
 
@@ -1567,6 +1610,18 @@
 <!--#IFMAP-SEMANTICS-IDL
           Link('telemetry-profile-sflow-profile', 'telemetry-profile', 'sflow-profile', ['ref'], 'optional', 'CRUD',
              'Sflow profile that this telemetry profile uses. Only one sflow profile can be associated to one telemetry profile.') -->
+<xsd:element name="telemetry-profile-grpc-profile"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Link('telemetry-profile-grpc-profile', 'telemetry-profile', 'grpc-profile', ['ref'], 'optional', 'CRUD',
+             'gRPC profile that this telemetry profile uses. Only one gRPC profile can be associated to one telemetry profile.') -->
+<xsd:element name="telemetry-profile-netconf-profile"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Link('telemetry-profile-netconf-profile', 'telemetry-profile', 'netconf-profile', ['ref'], 'optional', 'CRUD',
+             'netconf profile that this telemetry profile uses. Only one netconf profile can be associated to one telemetry profile.') -->
+<xsd:element name="telemetry-profile-snmp-profile"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Link('telemetry-profile-snmp-profile', 'telemetry-profile', 'snmp-profile', ['ref'], 'optional', 'CRUD',
+             'snmp profile that this telemetry profile uses. Only one snmp profile can be associated to one telemetry profile.') -->
 <xsd:element name="physical-router-telemetry-profile"/>
 <!--#IFMAP-SEMANTICS-IDL
           Link('physical-router-telemetry-profile', 'physical-router', 'telemetry-profile', ['ref'], 'optional', 'CRUD',
@@ -1588,6 +1643,60 @@
 <!--#IFMAP-SEMANTICS-IDL
               Property('sflow-parameters', 'sflow-profile', 'optional', 'CRUD',
                   'Parameters for each sflow profile, such as polling interval, sample rate, list of sflow enabled interfaces, sflow agent ID etc.') -->
+
+<xsd:element name="grpc-profile" type="ifmap:IdentityType"
+    description="This resource contains information specific to grpc parameters"/>
+
+<xsd:element name="project-grpc-profile"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Link('project-grpc-profile', 'project', 'grpc-profile', ['has'], 'optional', 'CRUD',
+             'list of grpc profiles supported under the project.') -->
+
+<xsd:element name="grpc-profile-is-default" type="xsd:boolean" default="false"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Property('grpc-profile-is-default', 'grpc-profile', 'optional', 'CRUD',
+              'This attribute indicates whether it is a default grpc profile or not. Default profiles are non-editable.') -->
+
+<xsd:element name="grpc-parameters" type="gRPCParameters"/>
+<!--#IFMAP-SEMANTICS-IDL
+              Property('grpc-parameters', 'grpc-profile', 'optional', 'CRUD',
+                  'Parameters for each grpc profile, such as grpc enable, allow client, top level sensor options etc.') -->
+
+<xsd:element name="snmp-profile" type="ifmap:IdentityType"
+    description="This resource contains information specific to snmp parameters"/>
+
+<xsd:element name="project-snmp-profile"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Link('project-snmp-profile', 'project', 'snmp-profile', ['has'], 'optional', 'CRUD',
+             'list of snmp profiles supported under the project.') -->
+
+<xsd:element name="snmp-profile-is-default" type="xsd:boolean" default="false"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Property('snmp-profile-is-default', 'snmp-profile', 'optional', 'CRUD',
+              'This attribute indicates whether it is a default snmp profile or not. Default profiles are non-editable.') -->
+
+<xsd:element name="snmp-parameters" type="snmpParameters"/>
+<!--#IFMAP-SEMANTICS-IDL
+              Property('snmp-parameters', 'snmp-profile', 'optional', 'CRUD',
+                  'Parameters for each snmp profile like the top level sensor options etc.') -->
+
+<xsd:element name="netconf-profile" type="ifmap:IdentityType"
+    description="This resource contains information specific to netconf parameters"/>
+
+<xsd:element name="project-netconf-profile"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Link('project-netconf-profile', 'project', 'netconf-profile', ['has'], 'optional', 'CRUD',
+             'list of netconf profiles supported under the project.') -->
+
+<xsd:element name="netconf-profile-is-default" type="xsd:boolean" default="false"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Property('netconf-profile-is-default', 'netconf-profile', 'optional', 'CRUD',
+              'This attribute indicates whether it is a default netconf profile or not. Default profiles are non-editable.') -->
+
+<xsd:element name="netconf-parameters" type="netconfParameters"/>
+<!--#IFMAP-SEMANTICS-IDL
+              Property('netconf-parameters', 'netconf-profile', 'optional', 'CRUD',
+                  'Parameters for each netconf profile like the top level sensor options etc.') -->
 
 <xsd:element name="storm-control-profile" type="ifmap:IdentityType"
     description="Storm control profile definition"/>
