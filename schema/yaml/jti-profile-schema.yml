@@ -1,0 +1,29 @@
+api_style: contrail
+extends:
+- base
+id: jti_profile
+parents:
+  project:
+    description: list of netconf profiles supported under the project.
+    operations: CRUD
+    presence: optional
+plural: jti_profiles
+prefix: /
+references: {}
+schema:
+  properties:
+    jti_parameters:
+      $ref: types.json#/definitions/jtiParameters
+      description: Parameters for each jti profile like the top level sensor options
+        etc.
+      operations: CRUD
+      presence: optional
+    jti_profile_is_default:
+      default: false
+      description: This attribute indicates whether it is a default jti profile or
+        not. Default profiles are non-editable.
+      operations: CRUD
+      presence: optional
+      type: boolean
+  required: []
+  type: object

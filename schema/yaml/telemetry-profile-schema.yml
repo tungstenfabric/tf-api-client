@@ -10,8 +10,28 @@ parents:
 plural: telemetry_profiles
 prefix: /
 references:
+  grpc_profile:
+    description: gRPC profile that this telemetry profile uses. Only one gRPC profile
+      can be associated to one telemetry profile.
+    operations: CRUD
+    presence: optional
+  jti_profile:
+    description: jti profile that this telemetry profile uses. Only one jti profile
+      can be associated to one telemetry profile.
+    operations: CRUD
+    presence: optional
+  netconf_profile:
+    description: netconf profile that this telemetry profile uses. Only one netconf
+      profile can be associated to one telemetry profile.
+    operations: CRUD
+    presence: optional
   sflow_profile:
     description: Sflow profile that this telemetry profile uses. Only one sflow profile
+      can be associated to one telemetry profile.
+    operations: CRUD
+    presence: optional
+  snmp_profile:
+    description: snmp profile that this telemetry profile uses. Only one snmp profile
       can be associated to one telemetry profile.
     operations: CRUD
     presence: optional
