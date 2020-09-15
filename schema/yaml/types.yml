@@ -1095,6 +1095,15 @@ definitions:
     - access
     - custom
     type: string
+  EnabledSensorParams:
+    items:
+      enum:
+      - physical-health
+      - interface-health
+      - control-plane-health
+      - service-layer-health
+      type: string
+    type: array
   EncapsulationPrioritiesType:
     properties:
       encapsulation:
@@ -4204,3 +4213,44 @@ definitions:
     maximum: 90
     minimum: 1
     type: integer
+  gRPCParameters:
+    properties:
+      allow_clients:
+        $ref: types.json#/definitions/SubnetListType
+        description: whitelist subnet of allowed clients on which various KPIs can
+          be monitored. This option is available only if grpc-enable is checked (True)
+        presence: optional
+      enabled_sensor_params:
+        $ref: types.json#/definitions/EnabledSensorParams
+        description: List of different top level sensor params that the user wishes
+          to monitor using telemetry. The user can include one or all of these for
+          telemetry monitoring by selecting specific options.
+      grpc_enable:
+        description: if this option is selected, then this enables gRPC based metric
+          collection on select sensors
+        type: boolean
+    type: object
+  jtiParameters:
+    properties:
+      enabled_sensor_params:
+        $ref: types.json#/definitions/EnabledSensorParams
+        description: List of different top level sensor params that the user wishes
+          to monitor using telemetry. The user can include one or all of these for
+          telemetry monitoring by selecting specific options.
+    type: object
+  netconfParameters:
+    properties:
+      enabled_sensor_params:
+        $ref: types.json#/definitions/EnabledSensorParams
+        description: List of different top level sensor params that the user wishes
+          to monitor using telemetry. The user can include one or all of these for
+          telemetry monitoring by selecting specific options.
+    type: object
+  snmpParameters:
+    properties:
+      enabled_sensor_params:
+        $ref: types.json#/definitions/EnabledSensorParams
+        description: List of different top level sensor params that the user wishes
+          to monitor using telemetry. The user can include one or all of these for
+          telemetry monitoring by selecting specific options.
+    type: object
