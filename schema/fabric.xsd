@@ -1089,6 +1089,19 @@
          Link('virtual-port-group-virtual-machine-interface', 'virtual-port-group', 'virtual-machine-interface', ['ref'], 'optional', 'CRUD',
          'list of virtual machine interfaces that are part of this virtual port group') -->
 
+<xsd:element name="virtual-machine-interface-virtual-port-group" type="VMIVirtualPortGroupAttributes"/>
+<!--#IFMAP-SEMANTICS-IDL
+         Link('virtual-machine-interface-virtual-port-group',
+              'virtual-machine-interface', 'virtual-port-group', ['ref'], 'optional', 'CRUD',
+              'virtual port group to which this virtaul machine interface is attached') -->
+
+<xsd:complexType name='VMIVirtualPortGroupAttributes'>
+        <xsd:element name='vlan-tag' type="VlanIdType" required='exclusive'
+                     description="Tagged VLAN" />
+        <xsd:element name='native-vlan-tag' type="VlanIdType" required='exclusive'
+                     description="Untagged VLAN" />
+</xsd:complexType>
+
 <xsd:element name="link-aggregation-group-virtual-machine-interface"/>
 <!--#IFMAP-SEMANTICS-IDL
          Link('link-aggregation-group-virtual-machine-interface', 'link-aggregation-group', 'virtual-machine-interface', ['ref'], 'optional', 'CRUD',
