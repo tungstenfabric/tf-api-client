@@ -3897,6 +3897,17 @@ definitions:
         presence: 'true'
         type: array
     type: object
+  VMIVirtualPortGroupAttributes:
+    properties:
+      native_vlan_tag:
+        $ref: types.json#/definitions/VlanIdType
+        description: Untagged VLAN
+        presence: exclusive
+      vlan_tag:
+        $ref: types.json#/definitions/VlanIdType
+        description: Tagged VLAN
+        presence: exclusive
+    type: object
   VRouterInstanceType:
     enum:
     - libvirt-qemu
