@@ -88,6 +88,11 @@ references:
     description: This interface is member of the referenced virtual network.
     operations: CRUD
     presence: required
+  virtual_port_group:
+    $ref: types.json#/definitions/VMIVirtualPortGroupAttributes
+    description: virtual port group to which this virtaul machine interface is attached
+    operations: CRUD
+    presence: optional
 schema:
   properties:
     ecmp_hashing_include_fields:
