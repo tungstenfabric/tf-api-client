@@ -1095,6 +1095,17 @@ definitions:
     - access
     - custom
     type: string
+  EnabledSensorParams:
+    properties:
+      control_plane_health:
+        type: boolean
+      interface_health:
+        type: boolean
+      physical_health:
+        type: boolean
+      service_layer_health:
+        type: boolean
+    type: object
   EncapsulationPrioritiesType:
     properties:
       encapsulation:
@@ -1394,6 +1405,23 @@ definitions:
     maximum: 4095
     minimum: 0
     type: integer
+  GrpcParameters:
+    properties:
+      allow_clients:
+        $ref: types.json#/definitions/SubnetListType
+        description: whitelist subnet of allowed clients on which various KPIs can
+          be monitored.
+        presence: 'true'
+      enabled_sensor_params:
+        $ref: types.json#/definitions/EnabledSensorParams
+        description: List of different top level sensor params that the user wishes
+          to monitor using telemetry. The user can include one or all of these for
+          telemetry monitoring by selecting specific options.
+      secure_mode:
+        $ref: types.json#/definitions/SecureModeType
+        description: secure (SSL) or cleartext mode of gRPC configuration.
+        presence: optional
+    type: object
   HealthCheckProtocolType:
     enum:
     - PING
@@ -2181,6 +2209,14 @@ definitions:
           type: string
         presence: optional
         type: array
+    type: object
+  NetconfParameters:
+    properties:
+      enabled_sensor_params:
+        $ref: types.json#/definitions/EnabledSensorParams
+        description: List of different top level sensor params that the user wishes
+          to monitor using telemetry. The user can include one or all of these for
+          telemetry monitoring by selecting specific options.
     type: object
   NodeProfileRoleType:
     properties:
@@ -3132,6 +3168,11 @@ definitions:
     maximum: 16777215
     minimum: 1
     type: integer
+  SecureModeType:
+    enum:
+    - cleartext
+    - ssl
+    type: string
   SecurityGroupIdType:
     maximum: 4294967296
     minimum: 8000000
@@ -3541,6 +3582,14 @@ definitions:
       rate:
         description: Rate at which sessions are logged
         type: integer
+    type: object
+  SnmpParameters:
+    properties:
+      enabled_sensor_params:
+        $ref: types.json#/definitions/EnabledSensorParams
+        description: List of different top level sensor params that the user wishes
+          to monitor using telemetry. The user can include one or all of these for
+          telemetry monitoring by selecting specific options.
     type: object
   StaticMirrorNhType:
     properties:

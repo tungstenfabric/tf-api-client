@@ -1,0 +1,29 @@
+api_style: contrail
+extends:
+- base
+id: snmp_profile
+parents:
+  project:
+    description: list of snmp profiles supported under the project.
+    operations: CRUD
+    presence: optional
+plural: snmp_profiles
+prefix: /
+references: {}
+schema:
+  properties:
+    snmp_parameters:
+      $ref: types.json#/definitions/SnmpParameters
+      description: Parameters for each snmp profile like the top level sensor options
+        etc.
+      operations: CRUD
+      presence: optional
+    snmp_profile_is_default:
+      default: false
+      description: This attribute indicates whether it is a default snmp profile or
+        not. Default profiles are non-editable.
+      operations: CRUD
+      presence: optional
+      type: boolean
+  required: []
+  type: object
