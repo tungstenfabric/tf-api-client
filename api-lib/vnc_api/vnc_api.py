@@ -880,7 +880,8 @@ class VncApi(object):
                 # Serialize all fields in xsd types
                 return obj.serialize_to_json()
         else:
-            return dict((k, v) for k, v in list(obj.__dict__.items()))
+            return dict((k, v) for k, v in list(obj.__dict__.items())\
+                if v is not None)
     # end _obj_serializer_diff
 
     def _create_api_server_session(self):
