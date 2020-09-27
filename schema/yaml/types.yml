@@ -2784,8 +2784,16 @@ definitions:
         description: Maximum number of instance ips
         presence: optional
         type: integer
+      loadbalancer:
+        description: Maximum number of loadbalancers
+        presence: optional
+        type: integer
       loadbalancer_healthmonitor:
         description: Maximum number of loadbalancer health monitors
+        presence: optional
+        type: integer
+      loadbalancer_listener:
+        description: Maximum number of loadbalancer listeners
         presence: optional
         type: integer
       loadbalancer_member:
