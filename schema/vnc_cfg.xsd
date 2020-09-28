@@ -2518,6 +2518,11 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
      Property('virtual-router-dpdk-enabled', 'virtual-router', 'optional', 'CRUD',
               'This vrouter\'s data path is using DPDK library, Virtual machines interfaces scheduled on this compute node will be tagged with additional flags so that they are spawned with user space virtio driver. It is only applicable for embedded vrouter.') -->
 
+<xsd:element name="virtual-router-sriov-physical-networks" type="KeyValuePairs"/>
+<!--#IFMAP-SEMANTICS-IDL
+     MapProperty('virtual-router-sriov-physical-networks',
+                 'virtual-router', 'key', 'optional', 'CRUD',
+'Dictionary of (physnet, interface) mapping for this virtual router.') -->
 
 <xsd:element name="physical-router-virtual-router"/>
 <!--#IFMAP-SEMANTICS-IDL

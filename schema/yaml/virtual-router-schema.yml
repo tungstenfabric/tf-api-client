@@ -42,6 +42,14 @@ schema:
       description: Ip address of the virtual router.
       operations: CRUD
       presence: required
+    virtual_router_sriov_physical_networks:
+      $ref: types.json#/definitions/KeyValuePairs
+      collectionType: map
+      description: Dictionary of (physnet, interface) mapping for this virtual router.
+      mapKey: key
+      operations: CRUD
+      presence: optional
+      wrapper: true
     virtual_router_type:
       $ref: types.json#/definitions/VirtualRouterType
       description: Different types of the vrouters in the system.
