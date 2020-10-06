@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03867b05_d0e96b46",
+        "filename": "schema/yaml/virtual-machine-interface-schema.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 979
+      },
+      "writtenOn": "2020-10-06T21:17:10Z",
+      "side": 1,
+      "message": "typo: virtaul",
+      "revId": "fc83e9c7777ea3bab79d2fe66ffc414094744934",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    }
+  ]
+}
