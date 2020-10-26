@@ -763,20 +763,36 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
     <xsd:all>
         <xsd:element name="permissions"   type="PermType" required='optional'
              description='No longer used, will be removed'/>
+        <!--#IFMAP-SEMANTICS-IDL Property('permissions', 'permissions', 'optional', 'R',
+                                          'No longer used, will be rmoved') -->
         <xsd:element name="uuid"          type="UuidType" required='true'
              description='UUID of the object, system automatically allocates one if not provided'/>
+        <!--#IFMAP-SEMANTICS-IDL Property('uuid', 'uuid', 'required', 'R',
+                         'UUID of the object, system automatically allocates one if not provided') -->
         <xsd:element name="enable"        type="xsd:boolean" required='true'
              description='Administratively Enable/Disable this object'/>
+        <!--#IFMAP-SEMANTICS-IDL Property('enable', 'enable', 'required', 'RU',
+                                          'Administratively Enable/Disable this object') -->
         <xsd:element name="created"       type="xsd:dateTime" required='system-only'
              description='Time when this object was created'/>
+        <!--#IFMAP-SEMANTICS-IDL Property('created', 'created', 'system-only', 'R',
+                                          'Time when this object was created') -->
         <xsd:element name="last-modified" type="xsd:dateTime" required='system-only'
-             description='Time when this object was created'/>
+             description='Time when this object was last modified'/>
+        <!--#IFMAP-SEMANTICS-IDL Property('last-modified', 'last-modified', 'system-only', 'R',
+                                          'Time when this object was last modified') -->
         <xsd:element name="description"   type="xsd:string" required='optional'
              description='User provided text'/>
+        <!--#IFMAP-SEMANTICS-IDL Property('description', 'description', 'optional', 'R',
+                                          'User provided text') -->
         <xsd:element name="user-visible"  type="xsd:boolean" default="true" required='system-only'
              description='System created internal objects will have this flag set and will not be visible'/>
+        <!--#IFMAP-SEMANTICS-IDL Property('user-visible', 'user-visible', 'system-only', 'R',
+                    'System created internal objects will have this flag set and will not be visible') -->
         <xsd:element name="creator"       type="xsd:string" required='system-only'
              description='Id of tenant who created this object'/>
+        <!--#IFMAP-SEMANTICS-IDL Property('creator', 'creator', 'system-only', 'R',
+                                          'Id of tenant who created this object') -->
     </xsd:all>
 </xsd:complexType>
 
@@ -795,7 +811,7 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
 </xsd:complexType>
 
 <xsd:element name="id-perms" type="IdPermsType"/>
-<!--#IFMAP-SEMANTICS-IDL Property('id-perms', 'all', 'system-only', 'R',
+<!--#IFMAP-SEMANTICS-IDL Property('id-perms', 'all', 'system-only', 'RU',
                                   'System maintained identity, time  and permissions data.') -->
 
 <xsd:element name="perms2" type="PermType2"/>
