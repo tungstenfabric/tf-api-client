@@ -1468,7 +1468,7 @@ definitions:
         presence: 'true'
         type: boolean
       last_modified:
-        description: Time when this object was created
+        description: Time when this object was last modified
         format: date-time
         presence: system-only
         type: string

@@ -43,7 +43,7 @@ schema:
     id_perms:
       $ref: types.json#/definitions/IdPermsType
       description: System maintained identity, time  and permissions data.
-      operations: R
+      operations: RU
       presence: system-only
     name:
       description: Name of the object, defaults to 'default-<resource-type>'
