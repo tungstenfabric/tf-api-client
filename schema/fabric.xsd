@@ -36,12 +36,16 @@
                      description="Job percentage completion when this playbook is completed. This attribute value should 100 if there is only one playbook defined in the job template. The job-completion-weigtages for all playbooks in the same job-template should add up to 100 exact."/>
         <xsd:element name="sequence-no" type="xsd:integer" required="optional"
                      description="Sequence number of the playbook"/>
-        <xsd:element name="recovery-playbook" type="xsd:boolean" required="optional"
-                     description="Set to true for playbooks that are used to recover from an error in the workflow"/>
     </xsd:all>
 </xsd:complexType>
 
 <xsd:complexType name="PlaybookInfoListType">
+    <xsd:all>
+        <xsd:element name="playbook-info" type="PlaybookInfoType" maxOccurs="unbounded"/>
+    </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="RecoveryPlaybookInfoListType">
     <xsd:all>
         <xsd:element name="playbook-info" type="PlaybookInfoType" maxOccurs="unbounded"/>
     </xsd:all>
@@ -523,6 +527,10 @@
 <!--#IFMAP-SEMANTICS-IDL
           ListProperty('job-template-playbooks', 'job-template', 'required', 'CRUD',
               'List of vendor specific playbooks that achieve the same functionality on each vendor device. All the vendor specific playbooks listed here share the same input/output schema defined in the job template') -->
+<xsd:element name="job-template-recovery-playbooks" type="RecoveryPlaybookInfoListType"/>
+<!--#IFMAP-SEMANTICS-IDL
+          ListProperty('job-template-recovery-playbooks', 'job-template', 'optional', 'CRUD',
+              'List of vendor specific playbooks that can be used to recover from an error in the workflow. All the vendor specific playbooks listed here share the same input/output schema defined in the job template') -->
 <xsd:element name="job-template-executables" type="ExecutableInfoListType"/>
 <!--#IFMAP-SEMANTICS-IDL
           ListProperty('job-template-executables', 'job-template', 'optional', 'CRUD',

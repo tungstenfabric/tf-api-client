@@ -74,6 +74,15 @@ schema:
       operations: CRUD
       presence: required
       wrapper: true
+    job_template_recovery_playbooks:
+      $ref: types.json#/definitions/RecoveryPlaybookInfoListType
+      collectionType: list
+      description: List of vendor specific playbooks that can be used to recover from
+        an error in the workflow. All the vendor specific playbooks listed here share
+        the same input/output schema defined in the job template
+      operations: CRUD
+      presence: optional
+      wrapper: true
     job_template_synchronous_job:
       description: if set to true, the "/execute-job" action simply executes the playbook
         directly and wait until the playbook finishes. So the playbook in the synchronous
