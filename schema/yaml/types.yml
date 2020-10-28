@@ -2421,11 +2421,6 @@ definitions:
         description: uri to the playbook location on the file server
         presence: 'true'
         type: string
-      recovery_playbook:
-        description: Set to true for playbooks that are used to recover from an error
-          in the workflow
-        presence: optional
-        type: boolean
       sequence_no:
         description: Sequence number of the playbook
         presence: optional
@@ -2960,6 +2955,13 @@ definitions:
     maximum: 65535
     minimum: 1
     type: integer
+  RecoveryPlaybookInfoListType:
+    properties:
+      playbook_info:
+        items:
+          $ref: types.json#/definitions/PlaybookInfoType
+        type: array
+    type: object
   RouteFType:
     enum:
     - exact
