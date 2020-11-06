@@ -279,6 +279,13 @@
     </xsd:all>
 </xsd:complexType>
 
+<xsd:simpleType name="TemplateType" default='SET'>
+     <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="SET"/>
+         <xsd:enumeration value="XML"/>
+     </xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="FabricNetworkType">
      <xsd:restriction base="xsd:string">
          <xsd:enumeration value="management"/>
@@ -498,6 +505,44 @@
             description="list of physical routers uuid exists in current destination logical-router and user has selected this PR for dci intra-fabric route leaks."/>
     </xsd:all>
 </xsd:complexType>
+
+<xsd:element name="config-template" type="ifmap:IdentityType"/>
+
+<xsd:element name="global-system-config-config-template"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Link('global-system-config-config-template',
+             'global-system-config', 'config-template', ['has'], 'optional', 'CRUD',
+             'List of config templates.') -->
+
+<xsd:element name="template-name" type="xsd:string"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Property('template-name', 'config-template', 'required', 'CRUD',
+              'Name of the config template') -->
+
+<xsd:element name="template-content" type="xsd:string"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Property('template-content', 'config-template', 'required', 'CRUD',
+              'Content of the config template') -->
+
+<xsd:element name="device-family" type="xsd:string"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Property('device-family', 'config-template', 'optional', 'CRUD',
+              'Device family of the config template') -->
+
+<xsd:element name="template-type" type="TemplateType"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Property('template-type', 'config-template', 'optional', 'CRUD',
+              'Type of the config template') -->
+
+<xsd:element name="device-vars" type="xsd:string"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Property('device-vars', 'config-template', 'optional', 'CRUD',
+              'Device specific variables associated to the config template') -->
+
+<xsd:element name="global-vars" type="xsd:string"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Property('global-vars', 'config-template', 'optional', 'CRUD',
+              'Global variables associated to the config template') -->
 
 <xsd:element name="job-template" type="ifmap:IdentityType"/>
 
