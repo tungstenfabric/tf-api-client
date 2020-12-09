@@ -3161,6 +3161,8 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
             description='Virtual network is used as external gateway for this logical router. This link will cause a SNAT to be spawned between all networks connected to logical router and external network.'/>
         <xsd:enumeration value="InternalVirtualNetwork"
             description='Virtual-network is used for EVPN Layer3 packets routing. This network is used to route packets from all children EVPN Layer2 networks linked this logical-router'/>
+        <xsd:enumeration value="NAPTSourcePool"
+            description='Virtual-network is used as Source Pool for NAPT with Multi Service line cards (MS-MPC/MS-MIC) for MX Router'/>
     </xsd:restriction>
 </xsd:simpleType>
 
