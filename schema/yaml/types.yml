@@ -105,6 +105,11 @@ definitions:
         description: Simple allow(pass) or deny action for traffic matching this rule
         presence: 'true'
     type: object
+  ActionNextValue:
+    enum:
+    - term
+    - policy
+    type: string
   ActionType:
     enum:
     - reject
@@ -3820,6 +3825,9 @@ definitions:
     properties:
       action:
         $ref: types.json#/definitions/ActionType
+      action_next_value:
+        $ref: types.json#/definitions/ActionNextValue
+        presence: optional
       as_path_expand:
         description: Valid only for network-device TermType. string should be in format
           of AS number(s) seperated by spaces
