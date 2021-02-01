@@ -2003,6 +2003,7 @@ definitions:
     enum:
     - ExternalGateway
     - InternalVirtualNetwork
+    - NAPTSourcePool
     type: string
   LogicalRouterVirtualNetworkType:
     properties:
