@@ -45,12 +45,6 @@
     </xsd:all>
 </xsd:complexType>
 
-<xsd:complexType name="RecoveryPlaybookInfoListType">
-    <xsd:all>
-        <xsd:element name="playbook-info" type="PlaybookInfoType" maxOccurs="unbounded"/>
-    </xsd:all>
-</xsd:complexType>
-
 <xsd:complexType name="VpgInterfaceParametersType">
     <xsd:all>
         <xsd:element name="ae-num" type="xsd:integer"/>
@@ -527,7 +521,7 @@
 <!--#IFMAP-SEMANTICS-IDL
           ListProperty('job-template-playbooks', 'job-template', 'required', 'CRUD',
               'List of vendor specific playbooks that achieve the same functionality on each vendor device. All the vendor specific playbooks listed here share the same input/output schema defined in the job template') -->
-<xsd:element name="job-template-recovery-playbooks" type="RecoveryPlaybookInfoListType"/>
+<xsd:element name="job-template-recovery-playbooks" type="PlaybookInfoListType"/>
 <!--#IFMAP-SEMANTICS-IDL
           ListProperty('job-template-recovery-playbooks', 'job-template', 'optional', 'CRUD',
               'List of vendor specific playbooks that can be used to recover from an error in the workflow. All the vendor specific playbooks listed here share the same input/output schema defined in the job template') -->

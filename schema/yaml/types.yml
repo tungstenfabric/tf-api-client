@@ -2961,13 +2961,6 @@ definitions:
     maximum: 65535
     minimum: 1
     type: integer
-  RecoveryPlaybookInfoListType:
-    properties:
-      playbook_info:
-        items:
-          $ref: types.json#/definitions/PlaybookInfoType
-        type: array
-    type: object
   RouteFType:
     enum:
     - exact
