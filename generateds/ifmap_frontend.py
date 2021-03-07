@@ -465,7 +465,7 @@ class IFMapApiGenerator(object):
                         write(gen_file, "            self.fq_name = [name]")
                     else:
                         write(gen_file, "            # if obj constructed from within server, ignore if parent not specified")
-                        write(gen_file, "            if not kwargs['parent_type']:")
+                        write(gen_file, "            if not kwargs.get('parent_type', None):")
                         parent_types = [parent_ident.getName() for parent_ident, _, _ in parents]
                         write(gen_file, "                raise AmbiguousParentError(\"%s\")" % parent_types)
                 else: # only one possible parent
