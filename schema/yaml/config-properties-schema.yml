@@ -1,0 +1,21 @@
+api_style: contrail
+extends:
+- base
+id: config_properties
+parents:
+  global_system_config:
+    description: List of config properties.
+    operations: CRUD
+    presence: optional
+plural: config_propertiess
+prefix: /
+references: {}
+schema:
+  properties:
+    properties:
+      $ref: types.json#/definitions/KeyValuePairs
+      description: List of Config properties
+      operations: CRUD
+      presence: optional
+  required: []
+  type: object
