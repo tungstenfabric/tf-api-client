@@ -499,6 +499,19 @@
     </xsd:all>
 </xsd:complexType>
 
+<xsd:element name="config-properties" type="ifmap:IdentityType"/>
+
+<xsd:element name="global-system-config-config-properties"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Link('global-system-config-config-properties',
+             'global-system-config', 'config-properties', ['has'], 'optional', 'CRUD',
+             'List of config properties.') -->
+
+<xsd:element name="properties" type="KeyValuePairs"/>
+<!--#IFMAP-SEMANTICS-IDL
+          Property('properties', 'config-properties', 'optional', 'CRUD',
+              'List of Config properties') -->
+
 <xsd:element name="job-template" type="ifmap:IdentityType"/>
 
 <xsd:element name="global-system-config-job-template"/>
