@@ -1733,7 +1733,7 @@ class VncApi(object):
     @check_homepage
     def amqp_request(self, exchange=None, exchange_type='direct',
                      routing_key=None, response_key=None,
-                     headers=None, payload=''):
+                     headers=None, payload='', amqp_timeout=None):
         if exchange is None or response_key is None:
             raise ValueError("Exchange and response key must be specified")
 
@@ -1742,7 +1742,8 @@ class VncApi(object):
             'exchange_type': exchange_type,
             'routing_key': routing_key,
             'response_key': response_key,
-            'payload': payload
+            'payload': payload,
+            'amqp_timeout': amqp_timeout
         }
         if headers:
             body['headers'] = headers
