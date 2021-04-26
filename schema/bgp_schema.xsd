@@ -1,5 +1,5 @@
 <!--
- Copyright (c) 2013 Juniper Networks, Inc. All rights reserved.
+q Copyright (c) 2013 Juniper Networks, Inc. All rights reserved.
  -->
 <xsd:schema 
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -136,7 +136,7 @@
          description='Router ID for this BGP router. Dotted ip notation. For contrail control-nodes System will automatically assign value of address field.'/>
     <xsd:element name='address' type='smi:IpAddress' required='true' operations='CR'
          description='Ip address used to reach this BGP router by the system.'/>
-    <xsd:element name='port' type='xsd:integer' required='optional' operations='CUR'
+    <xsd:element name='port' type='xsd:integer' default='179' required='optional' operations='CUR'
          description='TCP port number on which BGP protocol connections are accepted. default is based on standareds.'/>
     <xsd:element name='source-port' type='xsd:integer' required='system-only' operations='CUR'
          description='For system internal use in BGPaaS service.'/>
