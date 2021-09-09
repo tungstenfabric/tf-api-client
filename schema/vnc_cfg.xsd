@@ -51,6 +51,13 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
     <xsd:element name="mac-address" maxOccurs="unbounded"/>
 </xsd:complexType>
 
+<xsd:simpleType name="NetworkMtuType">
+    <xsd:restriction base="xsd:integer">
+        <xsd:minInclusive value="1500"/>
+        <xsd:maxInclusive value="9000"/>
+    </xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="IpAddressType">
     <xsd:restriction base="xsd:string"
          description='String of standard notation of ipv4 or ipv6 address'/>
@@ -1746,6 +1753,8 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
              description='Flag to mark the virtual network as mirror destination network'/>
         <xsd:element name='max-flows' type='MaxFlowsType' default='0' required='optional'
              description='Maximum number of flows permitted on each VMI of the VN'/>
+        <xsd:element name='mtu' type='NetworkMtuType' required='optional'
+             description='MTU value for this network'/>
     </xsd:all>
 </xsd:complexType>
 

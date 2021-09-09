@@ -2225,6 +2225,10 @@ definitions:
           to monitor using telemetry. The user can include one or all of these for
           telemetry monitoring by selecting specific options.
     type: object
+  NetworkMtuType:
+    maximum: 9000
+    minimum: 1500
+    type: integer
   NodeProfileRoleType:
     properties:
       physical_role:
@@ -4188,6 +4192,10 @@ definitions:
         description: Flag to mark the virtual network as mirror destination network
         presence: optional
         type: boolean
+      mtu:
+        $ref: types.json#/definitions/NetworkMtuType
+        description: MTU value for this network
+        presence: optional
       network_id:
         description: Not currently in used
         presence: system-only
