@@ -1879,6 +1879,11 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
      Property('is-shared', 'virtual-network', 'optional', 'CRUD',
               'When true, this virtual network is shared with all tenants.') -->
 
+<xsd:element name="mtu" type="xsd:integer"/>
+<!--#IFMAP-SEMANTICS-IDL
+     Property('mtu', 'virtual-network', 'optional', 'CRUD',
+              'MTU attribute for the virtual network') -->
+
 <xsd:element name="external-ipam" type="xsd:boolean"/>
     <xsd:annotation>
         <xsd:documentation>
