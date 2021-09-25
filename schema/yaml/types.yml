@@ -2226,8 +2226,8 @@ definitions:
           telemetry monitoring by selecting specific options.
     type: object
   NetworkMtuType:
-    maximum: 9000
-    minimum: 1500
+    maximum: 9216
+    minimum: 0
     type: integer
   NodeProfileRoleType:
     properties:
