@@ -51,10 +51,11 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
     <xsd:element name="mac-address" maxOccurs="unbounded"/>
 </xsd:complexType>
 
+# CEM-23123:MTU value range from 0-9216
 <xsd:simpleType name="NetworkMtuType">
     <xsd:restriction base="xsd:integer">
-        <xsd:minInclusive value="1500"/>
-        <xsd:maxInclusive value="9000"/>
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="9216"/>
     </xsd:restriction>
 </xsd:simpleType>
 
