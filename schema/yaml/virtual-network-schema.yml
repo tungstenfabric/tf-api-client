@@ -159,10 +159,10 @@ schema:
       operations: CRUD
       presence: optional
     mtu:
+      $ref: types.json#/definitions/NetworkMtuType
       description: MTU attribute for the virtual network
       operations: CRUD
       presence: optional
-      type: integer
     multi_policy_service_chains_enabled:
       operations: CRUD
       presence: optional
