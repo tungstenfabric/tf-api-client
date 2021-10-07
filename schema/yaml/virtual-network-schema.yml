@@ -158,6 +158,11 @@ schema:
       description: MAC move control on the network
       operations: CRUD
       presence: optional
+    mtu:
+      description: MTU attribute for the virtual network
+      operations: CRUD
+      presence: optional
+      type: integer
     multi_policy_service_chains_enabled:
       operations: CRUD
       presence: optional
