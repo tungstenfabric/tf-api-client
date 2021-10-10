@@ -171,7 +171,7 @@ bool %(class)s::Decode(const xml_node &parent, std::string *id_name,
                                info.membername)
                     file.write(indent + 'ptr->property_set_.set(%s);\n' % prop.getPropertyId())
                 elif info.ctypename == 'uint64_t':
-                    fmt = 'if (!autogen::ParseUnsignedLong(node, &ptr->%s)) return false;'
+                    fmt = 'if (!autogen::ParseUnsignedLong(node, &ptr->%s)) return false;\n'
                     file.write(indent + fmt % info.membername)
                     file.write(indent + 'ptr->property_set_.set(%s);\n' % prop.getPropertyId())
                 elif info.ctypename == 'int':

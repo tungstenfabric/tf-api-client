@@ -1036,6 +1036,7 @@ def UseSystemBoost(env):
         'SUSE Linux Enterprise Server ': '12',
         'redhat': '7.0',
         'Red Hat Enterprise Linux Server': '7.0',
+        'Red Hat Enterprise Linux': '8.0',
     }
     v_required = exclude_dist.get(distname)
     if v_required and LooseVersion(version) >= LooseVersion(v_required):
@@ -1057,6 +1058,7 @@ def UseSystemTBB(env):
         'Fedora': '20',
         'redhat': '7.0',
         'Red Hat Enterprise Linux Server': '7.0',
+        'Red Hat Enterprise Linux': '8.0',
     }
     (distname, version, _) = env.GetPlatformInfo()
     v_required = systemTBBdict.get(distname)
@@ -1077,6 +1079,7 @@ def UseCassandraCql(env):
         'CentOS Linux': '7.1',
         'redhat': '7.0',
         'Red Hat Enterprise Linux Server': '7.0',
+        'Red Hat Enterprise Linux': '8.0',
     }
     (distname, version, _) = env.GetPlatformInfo()
     v_required = cassandra_cql_supported.get(distname)
