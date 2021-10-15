@@ -46,6 +46,19 @@ def GetPlatformInfo(env):
 
     return GetPlatformInfo.distro
 
+def GetPyVersion(env):
+    pyver = env.get('contrail_py_version', '0.1dev')
+    try:
+        # ubi8 always automatically convert version on build
+        from setuptools.extern import packaging
+        v = packaging.version.Version(pyver)
+        if pyver != v:
+            print("WARN: use new versioning scheme %s instead of %s" % (v, pyver))
+            pyver = v
+    except:
+        pass
+    return pyver
+
 def PlatformExclude(env, **kwargs):
     """
     Return True if platform_excludes list includes a tuple that matches this host/version
@@ -173,10 +186,11 @@ def GetVncAPIPkg(env):
     h,v = env.GetBuildVersion()
     return '/api-lib/dist/contrail-api-client-%s.tar.gz' % v
 
+pyver = GetPyVersion(dict())
 sdist_default_depends = [
-    '/config/common/dist/contrail-config-common-0.1dev.tar.gz',
-    '/tools/sandesh/library/python/dist/sandesh-0.1dev.tar.gz',
-    '/sandesh/common/dist/sandesh-common-0.1dev.tar.gz',
+    '/config/common/dist/contrail-config-common-%s.tar.gz' % pyver,
+    '/tools/sandesh/library/python/dist/sandesh-%s.tar.gz' % pyver,
+    '/sandesh/common/dist/sandesh-common-%s.tar.gz' % pyver,
 ]
 
 # SetupPyTestSuiteWithDeps
@@ -1186,6 +1200,7 @@ def SetupBuildEnvironment(conf):
 
     env.AddMethod(PlatformExclude, "PlatformExclude")
     env.AddMethod(GetPlatformInfo, "GetPlatformInfo")
+    env.AddMethod(GetPyVersion, "GetPyVersion")
 
     # Let's decide how many jobs (-jNN) we should use.
     nj = GetOption('num_jobs')
