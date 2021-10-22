@@ -2503,6 +2503,10 @@ definitions:
         format: date-time
         presence: optional
         type: string
+      description:
+        description: User provided text
+        presence: optional
+        type: string
       direction:
         $ref: types.json#/definitions/DirectionType
         presence: 'true'
