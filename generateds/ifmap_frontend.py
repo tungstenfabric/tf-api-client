@@ -664,11 +664,17 @@ class IFMapApiGenerator(object):
                 if link.getXsdType(): # link with attr
                    set_one_args = set_one_args + ", ref_data=None"
                    add_one_args = set_one_args
-                   set_list_args = set_list_args + ", ref_data_list=None"
+                   if to_ident.getName() == 'control-node-zone':
+                       set_list_args = set_list_args + ", ref_data_list=None" + ",ref_uuid_list=None"
+                   else:
+                       set_list_args = set_list_args + ", ref_data_list=None"
 
                    set_one_val = "[{'to':ref_obj.get_fq_name(), 'attr':ref_data}]"
                    add_one_val = "{'to':ref_obj.get_fq_name(), 'attr':ref_data}"
-                   set_list_val = "[{'to':ref_obj_list[i], 'attr':ref_data_list[i]} for i in range(len(ref_obj_list))]"
+                   if to_ident.getName() == 'control-node-zone':
+                       set_list_val = "[{'to':ref_obj_list[i], 'attr':ref_data_list[i], 'uuid':ref_uuid_list[i]} for i in range(len(ref_obj_list))]"
+                   else:
+                       set_list_val = "[{'to':ref_obj_list[i], 'attr':ref_data_list[i]} for i in range(len(ref_obj_list))]"
                 else: # link with no attr
                    # TODO always put attr with None?
                    set_one_val = "[{'to':ref_obj.get_fq_name()}]"
@@ -733,6 +739,8 @@ class IFMapApiGenerator(object):
                 write(gen_file, '        """Set %s list for %s.' %(to_ident.getName(), ident_name))
                 write(gen_file, '        ')
                 write(gen_file, '        :param ref_obj_list: list of %s object' %(CamelCase(to_ident.getName())))
+                if to_ident.getName() == 'control-node-zone':
+                    write(gen_file, '        :param ref_uuid_list: list of uuid of %s object' %(CamelCase(to_ident.getName())))
                 if link.getXsdType():
                     write(gen_file, '        :param ref_data_list: list of %s object' %(link.getXsdType()))
                 write(gen_file, '        ')
@@ -1754,10 +1762,14 @@ class IFMapApiGenerator(object):
                 write(self.gen_file, "%sif not self.%s in prop_diff:" %(" "*tabs, ref_name.upper()))
                 tabs=tabs+4
                 write(self.gen_file, "%sref_obj_list = [ref['to'] for ref in obj_0.get_%s() or []]" %(" "*tabs, ref_name))
+                if ref_name == 'control_node_zone_refs':
+                   write(self.gen_file, "%sref_uuid_list = [ref['uuid'] for ref in obj_0.get_%s() or []]" %(" "*tabs, ref_name))
                 tabs=tabs-4
                 write(self.gen_file, "%selse:" %(" "*tabs))
                 tabs=tabs+4
                 write(self.gen_file, "%sref_obj_list = []" %(" "*tabs))
+                if ref_name == 'control_node_zone_refs':
+                    write(self.gen_file, "%sref_uuid_list = []" %(" "*tabs))
                 write(self.gen_file, "%supdate = 1" %(" "*tabs))
                 tabs=tabs-4
 
@@ -1818,7 +1830,10 @@ class IFMapApiGenerator(object):
                 write(self.gen_file, "")
                 write(self.gen_file, "%sif update or ref_obj_list or ref_data_list:" %(" "*tabs))
                 tabs = tabs+4
-                write(self.gen_file, "%sobj_0.set_%s_list(ref_obj_list, ref_data_list)" %(" "*tabs, ref_name.replace("_refs", "")))
+                if ref_name == 'control_node_zone_refs':
+                    write(self.gen_file, "%sobj_0.set_%s_list(ref_obj_list, ref_data_list, ref_uuid_list)" %(" "*tabs, ref_name.replace("_refs", "")))
+                else:
+                    write(self.gen_file, "%sobj_0.set_%s_list(ref_obj_list, ref_data_list, ref_uuid_list)" %(" "*tabs, ref_name.replace("_refs", "")))
                 tabs = tabs-4
             else:
                 write(self.gen_file, "%sobj_0.set_%s_list(ref_obj_list)" %(" "*tabs, ref_name.replace("_refs", "")))
