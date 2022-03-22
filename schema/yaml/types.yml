@@ -2431,6 +2431,10 @@ definitions:
         description: uri to the playbook location on the file server
         presence: 'true'
         type: string
+      refresh_token:
+        description: if set to true, then set auth_token
+        presence: optional
+        type: boolean
       sequence_no:
         description: Sequence number of the playbook
         presence: optional

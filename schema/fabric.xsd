@@ -28,6 +28,8 @@
                      description="uri to the playbook location on the file server"/>
         <xsd:element name="multi-device-playbook" type="xsd:boolean" default='false'
                      description="if set to true, the execute-job action url uses the job-template parameter 'device-list' to execute the playbook in parallel"/>
+        <xsd:element name="refresh-token" type="xsd:boolean" required="optional" default='false'
+                      description="if set to true, then set auth_token"/> 
         <xsd:element name="vendor" type="xsd:string" required="optional"
                      description="Vendor name"/>
         <xsd:element name="device-family" type="xsd:string" required="optional"
