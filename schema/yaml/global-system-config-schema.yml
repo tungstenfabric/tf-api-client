@@ -122,6 +122,11 @@ schema:
       description: Used to create collision-free route distinguishers.
       operations: CRUD
       presence: optional
+    route_replication_threshold:
+      $ref: types.json#/definitions/RouteReplicationThresholdType
+      description: Time to wait before enabling optimisation in route replication.
+      operations: CRUD
+      presence: optional
     supported_device_families:
       $ref: types.json#/definitions/DeviceFamilyListType
       description: List of all supported physical router device family names. Used

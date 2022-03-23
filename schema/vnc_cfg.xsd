@@ -718,6 +718,13 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
      </xsd:restriction>
 </xsd:simpleType>
 
+<xsd:simpleType name="RouteReplicationThresholdType">
+     <xsd:restriction base="xsd:integer">
+         <xsd:minInclusive value="30000000"/>
+         <xsd:maxInclusive value="180000000"/>
+     </xsd:restriction>
+</xsd:simpleType>
+
 <xsd:simpleType name="AccessType">
      <xsd:restriction base="xsd:integer" required='true'
           description_1="Three bits representing rwx."
@@ -1115,6 +1122,11 @@ targetNamespace="http://www.contrailsystems.com/2012/VNC-CONFIG/0">
 <!--#IFMAP-SEMANTICS-IDL
      Property('rd-cluster-seed', 'global-system-config', 'optional', 'CRUD',
               'Used to create collision-free route distinguishers.') -->
+
+<xsd:element name="route-replication-threshold" type="RouteReplicationThresholdType"/>
+<!--#IFMAP-SEMANTICS-IDL
+     Property('route-replication-threshold', 'global-system-config', 'optional', 'CRUD',
+              'Time to wait before enabling optimisation in route replication.') -->
 
 <xsd:element name="ip-fabric-subnets" type="SubnetListType"/>
 <!--#IFMAP-SEMANTICS-IDL
