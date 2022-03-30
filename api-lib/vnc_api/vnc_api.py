@@ -374,6 +374,9 @@ class VncApi(object):
         # TODO allow for username/password to be present in creds file
 
         self._obj_serializer = self._obj_serializer_diff
+        self.new_response = None
+        self._authn_body_new = None
+        self.url = None
         for object_type, resource_type in all_resource_type_tuples:
             for oper_str in ('_create', '_read', '_update', '_delete',
                              's_list', '_get_default_id', '_read_draft'):
@@ -958,6 +961,43 @@ class VncApi(object):
                 raise RuntimeError('Authentication Failure')
     # end _authenticate
 
+    def _reauthenticate(self, response=None, headers=None):
+        self._authn_body_new = \
+                '{"auth":{"identity":{' + \
+                '"methods": ["token"],' + \
+                '"token":{' + \
+                '"id": "%s"' % (self._auth_token) + \
+                '}' + \
+                '}' + \
+                '}' + \
+                '}'
+        if self._authn_token_url:
+                self.url = self._authn_token_url
+        else:
+                self.url = "%s://%s:%s%s" % (
+                    self._authn_protocol,
+                    self._authn_server,
+                    self._authn_port,
+                    self._authn_url,
+                )
+        new_headers = headers or {}
+        try:
+             self.new_response = requests.post(
+                        self.url,
+                        data=self._authn_body_new,
+                        headers=self._DEFAULT_AUTHN_HEADERS,
+                    )
+        except Exception as e:
+                errmsg = ('Unable to connect to keystone (%s) for reauthentication. '
+                    'Exception %s' % (url, e))
+                raise RuntimeError(errmsg)
+
+        if (self.new_response.status_code == 200) or (self.new_response.status_code == 201):
+           # plan is to re-issue original request with new token
+           self._auth_token = self.new_response.headers['x-subject-token']
+           new_headers['X-AUTH-TOKEN'] = self._auth_token
+           return new_headers
+  
     def _http_get(self, uri, headers=None, query_params=None):
         url = "%s://%s:%s%s" % (self._api_connect_protocol,
                                 self._web_host, self._web_port, uri)
