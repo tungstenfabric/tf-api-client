@@ -3030,6 +3030,10 @@ definitions:
         presence: optional
         type: boolean
     type: object
+  RouteReplicationThresholdType:
+    maximum: 60
+    minimum: 0
+    type: integer
   RouteTableType:
     properties:
       route:
