@@ -31,6 +31,7 @@ xsd:targetNamespace="http://www.contrailsystems.com/xmpp-enet-cfg.xsd">
     <xsd:element name="l3-label" type="xsd:integer"/>
     <xsd:element name="tunnel-encapsulation-list" type="EnetTunnelEncapsulationListType"/>
     <xsd:element name="tag-list" type="EnetTagListType"/>
+    <xsd:element name="local-sequence-number" type="xsd:integer"/>
 </xsd:complexType>
 
 <xsd:complexType name="EnetOlistType">
